@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthBridge AI | Public Health Chatbot</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+:root {
+    --gov-blue: #1e3a8a;
+    --accent: #10b981;
+    --glass: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    background: linear-gradient(-45deg, #eef2ff, #e0f2fe, #f0f9ff, #f8fafc);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes gradientBG {
+0% {background-position:0% 50%;}
+50% {background-position:100% 50%;}
+100% {background-position:0% 50%;}
+}
+
+.header {
+background: var(--gov-blue);
+color:white;
+padding:18px 30px;
+border-bottom:4px solid #fbbf24;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ai-pulse{
+width:12px;
+height:12px;
+background:#22c55e;
+border-radius:50%;
+margin-right:8px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(34,197,94,.7);}
+70%{transform:scale(1);box-shadow:0 0 0 10px rgba(34,197,94,0);}
+100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(34,197,94,0);}
+}
+
+.main-container{
+flex:1;
+display:flex;
+overflow:hidden;
+padding:10px;
+gap:10px;
+}
+
+.sidebar{
+width:320px;
+background:var(--glass);
+backdrop-filter:blur(10px);
+border-radius:16px;
+padding:25px;
+box-shadow:0 8px 32px rgba(0,0,0,0.05);
+}
+
+@media(max-width:992px){
+.sidebar{display:none;}
+}
+
+.feature{
+background:white;
+padding:12px;
+border-radius:10px;
+margin-bottom:12px;
+font-size:.85rem;
+transition:.3s;
+}
+
+.feature:hover{
+transform:translateX(5px);
+border-color:var(--gov-blue);
+}
+
+.chat-area{
+flex:1;
+display:flex;
+flex-direction:column;
+background:var(--glass);
+backdrop-filter:blur(10px);
+border-radius:20px;
+box-shadow:0 15px 45px rgba(0,0,0,0.1);
+overflow:hidden;
+}
+
+.messages{
+flex:1;
+overflow-y:auto;
+padding:25px;
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.bubble{
+max-width:80%;
+padding:14px 18px;
+border-radius:20px;
+font-size:.95rem;
+line-height:1.5;
+animation:slideIn .4s forwards;
+}
+
+@keyframes slideIn{
+from{opacity:0;transform:translateY(20px) scale(.8);}
+to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.bot{
+background:white;
+color:#1e293b;
+align-self:flex-start;
+border-bottom-left-radius:4px;
+}
+
+.user{
+background:linear-gradient(135deg,var(--gov-blue),#3b82f6);
+color:white;
+align-self:flex-end;
+border-bottom-right-radius:4px;
+}
+
+.typing-dots{
+display:flex;
+gap:4px;
+padding:5px 0;
+}
+
+.dot{
+width:8px;
+height:8px;
+background:#94a3b8;
+border-radius:50%;
+animation:wave 1.3s infinite;
+}
+
+.dot:nth-child(2){animation-delay:.15s;}
+.dot:nth-child(3){animation-delay:.3s;}
+
+@keyframes wave{
+0%,60%,100%{transform:translateY(0);}
+30%{transform:translateY(-6px);}
+}
+
+.input-box{
+padding:25px;
+background:white;
+border-top:1px solid #f1f5f9;
+display:flex;
+gap:12px;
+}
+
+.form-control{
+border-radius:12px;
+border:2px solid #e2e8f0;
+padding:12px 20px;
+}
+
+.form-control:focus{
+border-color:var(--gov-blue);
+box-shadow:0 0 0 4px rgba(30,58,138,.1);
+}
+
+#sendBtn{
+border-radius:12px;
+font-weight:bold;
+padding:0 25px;
+background:var(--gov-blue);
+}
+
+.alert-tag{
+background:#fee2e2;
+color:#b91c1c;
+padding:10px;
+border-radius:10px;
+font-size:.8rem;
+font-weight:bold;
+margin-bottom:20px;
+border-left:5px solid #ef4444;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<div>
+<h4 class="mb-0 fw-bold">HealthBridge AI</h4>
+<small class="opacity-75">Bharat Public Health Assistant</small>
+</div>
+
+<div class="d-flex align-items-center gap-3">
+
+<a href="projects.html" class="btn btn-sm btn-outline-light">← Back to Archive</a>
+
+<select id="langSelect" class="form-select form-select-sm" style="width:150px;">
+<option value="English">English</option>
+<option value="Telugu">తెలుగు</option>
+<option value="Hindi">हिंदी</option>
+<option value="Tamil">தமிழ்</option>
+</select>
+
+<div class="d-flex align-items-center bg-white bg-opacity-10 px-3 py-2 rounded-pill">
+<div class="ai-pulse"></div>
+<span class="small fw-bold">SYSTEM ACTIVE</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="main-container">
+
+<div class="sidebar">
+<div class="alert-tag">⚠️ DENGUE RISK ALERT: NEIGHBORING REGION</div>
+
+<h6 class="fw-bold text-primary mb-3">Mission Goal</h6>
+<div class="feature">Educate rural populations on symptoms & prevention.</div>
+
+<h6 class="fw-bold mt-4 mb-3">Capabilities</h6>
+
+<ul class="list-unstyled small text-muted">
+<li class="mb-2">✅ Preventive Health</li>
+<li class="mb-2">✅ Symptom Guide</li>
+<li class="mb-2">✅ Vaccine Schedules</li>
+<li class="mb-2">✅ Real-time Alerts</li>
+</ul>
+
+<hr>
+
+<div class="p-3 bg-primary bg-opacity-10 rounded-3">
+<small class="fw-bold text-primary">Expected Accuracy: 80%+</small>
+</div>
+
+</div>
+
+<div class="chat-area">
+
+<div class="messages" id="chatWin">
+<div class="bubble bot">
+Namaste! I am HealthBridge AI 🤖.  
+How can I assist you with your health concerns today?
+</div>
+</div>
+
+<div class="input-box">
+<input type="text" id="uIn" class="form-control"
+placeholder="Ask about symptoms or health..."
+onkeypress="if(event.key==='Enter') runAI()">
+
+<button class="btn btn-primary" id="sendBtn" onclick="runAI()">SEND</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const API_KEY = "AIzaSyC9GH-I6KjoqVTQokdqM5atP2Ec6fEqhnE";
+const MODEL_ID = "gemini-2.5-flash";
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:generateContent?key=${API_KEY}`;
+
+function addMessage(txt, cls){
+
+const d=document.getElementById('chatWin');
+const m=document.createElement('div');
+m.className=`bubble ${cls}`;
+
+if(cls==='bot typing'){
+m.innerHTML=`<div class="typing-dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>`;
+}
+else{
+m.innerText=txt;
+}
+
+d.appendChild(m);
+d.scrollTop=d.scrollHeight;
+
+return m;
+}
+
+async function runAI(){
+
+const input=document.getElementById('uIn');
+const btn=document.getElementById('sendBtn');
+
+const userText=input.value.trim();
+const language=document.getElementById("langSelect").value;
+
+if(!userText) return;
+
+addMessage(userText,'user');
+
+input.value='';
+input.disabled=true;
+btn.disabled=true;
+
+const loading=addMessage("","bot typing");
+
+try{
+
+const response=await fetch(API_URL,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+contents:[{
+parts:[{
+text:`You are a public health assistant for rural India. Respond ONLY in ${language}. Keep answers simple and helpful for rural citizens. Question: ${userText}`
+}]
+}]
+})
+});
+
+if(!response.ok){
+
+const errData=await response.json();
+throw new Error(errData.error?.message || "API Error");
+
+}
+
+const data=await response.json();
+
+if(data.candidates && data.candidates.length>0){
+
+const aiResponse=data.candidates[0].content.parts[0].text;
+
+loading.remove();
+
+addMessage(aiResponse,'bot');
+
+}
+else{
+throw new Error("No response from AI");
+}
+
+}
+
+catch(error){
+
+loading.remove();
+addMessage(`Error: ${error.message}`,'bot');
+
+}
+
+finally{
+
+input.disabled=false;
+btn.disabled=false;
+input.focus();
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

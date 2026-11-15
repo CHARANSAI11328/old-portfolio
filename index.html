@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charan Sai | Freelance Web Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#050505;
+--accent:#818cf8;
+--accent-glow:rgba(129,140,248,0.15);
+--text-main:#ffffff;
+--text-dim:#9ca3af;
+--surface:#111113;
+--border:rgba(255,255,255,0.06);
+--glass:rgba(255,255,255,0.02);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text-main);
+overflow-x:hidden;
+line-height:1.6;
+}
+
+@keyframes fadeInUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes photoPop{
+0%{opacity:0;transform:scale(0.9) translateY(20px);}
+100%{opacity:1;transform:scale(1) translateY(0);}
+}
+
+@keyframes blink{
+50% { border-color: transparent }
+}
+
+.reveal{opacity:0;}
+.active-reveal{animation:fadeInUp 1s cubic-bezier(0.2,0.8,0.2,1) forwards;}
+
+.noise{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+opacity:0.03;
+pointer-events:none;
+background:url('https://grainy-gradients.vercel.app/noise.svg');
+}
+
+.spotlight{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:60vw;
+height:60vw;
+background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);
+z-index:-1;
+filter:blur(80px);
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:24px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);
+backdrop-filter:blur(10px);
+}
+
+.nav-links{
+display:flex;
+gap:30px;
+background:var(--glass);
+padding:10px 25px;
+border-radius:100px;
+border:1px solid var(--border);
+}
+
+nav a{
+text-decoration:none;
+color:var(--text-dim);
+font-size:0.85rem;
+font-weight:500;
+transition:0.4s;
+}
+
+nav a:hover,
+nav a.active{
+color:var(--text-main);
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:120px 8% 50px;
+}
+
+.hero-container{
+display:flex;
+align-items:center;
+justify-content:space-between;
+width:100%;
+max-width:1400px;
+gap:50px;
+}
+
+.hero-text{flex:1;}
+
+.hero-text h2{
+color:var(--accent);
+font-weight:700;
+margin-bottom:20px;
+letter-spacing:2px;
+font-size:1rem;
+}
+
+.hero-text h1{
+font-size:clamp(2.5rem,6vw,5rem);
+font-weight:800;
+letter-spacing:-3px;
+line-height:1.1;
+margin-bottom:20px;
+min-height: 1.2em;
+}
+
+#typewriter{
+border-right: 3px solid var(--accent);
+white-space: nowrap;
+padding-right: 5px;
+animation: blink 0.75s step-end infinite;
+}
+
+.hero-text p{
+color:var(--text-dim);
+max-width:520px;
+font-size:1.1rem;
+}
+
+.hero-image{
+flex:0 0 40%;
+display:flex;
+justify-content:center;
+opacity:0;
+}
+
+.hero-image img{
+width:100%;
+max-width:400px;
+border-radius:30px;
+border:1px solid var(--border);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.photo-appear{
+animation:photoPop 1s cubic-bezier(0.2,0.8,0.2,1) forwards;
+}
+
+.bento-container{
+padding:0 8% 100px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.bento-card{
+background:var(--surface);
+border:1px solid var(--border);
+border-radius:24px;
+padding:35px;
+text-decoration:none;
+color:inherit;
+transition:0.5s;
+}
+
+.bento-card:hover{
+transform:translateY(-10px);
+border-color:var(--accent);
+}
+
+.span-2{
+grid-column:span 2;
+}
+
+.bento-card h3{
+font-size:1.4rem;
+margin-bottom:10px;
+color:var(--accent);
+}
+
+.services{
+padding:100px 8%;
+}
+
+.services-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+.trust{
+padding:80px 8%;
+}
+
+.cta{
+padding:120px 8%;
+text-align:center;
+}
+
+.cta-btn{
+padding:15px 35px;
+background:white;
+color:black;
+border-radius:12px;
+text-decoration:none;
+font-weight:700;
+}
+
+footer{
+margin:0 8% 40px;
+padding:60px 0;
+border-top:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+}
+
+@media(max-width:992px){
+
+.hero-container{
+flex-direction:column;
+text-align:center;
+}
+
+.hero-image{
+width:60%;
+margin-bottom:30px;
+}
+
+.services-grid{
+grid-template-columns:1fr;
+}
+
+.bento-container{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="noise"></div>
+<div class="spotlight" id="spotlight"></div>
+
+<nav>
+<div style="font-weight:800;letter-spacing:-1px;">CHARAN.DEV</div>
+
+<div class="nav-links">
+<a class='active' href='index.html'>Home</a>
+<a href='about.html'>Expertise</a>
+<a href='projects.html'>Archive</a>
+<a href='experience.html'>Journey</a>
+<a href='contact.html'>Contact</a>
+</div>
+</nav>
+
+<section class="hero">
+
+<div class="hero-container">
+
+<div class="hero-text reveal active-reveal">
+
+<h2>FREELANCE WEB DEVELOPER</h2>
+
+<h1>Hi, I'm <span id="typewriter"></span></h1>
+
+<p>
+Freelance Web Developer helping businesses build fast, modern websites
+and powerful web applications. Available for freelance projects.
+</p>
+
+</div>
+
+<div class="hero-image" id="hero-img">
+<img src="charan.jpeg">
+</div>
+
+</div>
+
+</section>
+
+<section class="services reveal">
+
+<h2 style="font-size:3rem;">Services</h2>
+
+<div class="services-grid">
+
+<div class="bento-card">
+<h3>Business Websites</h3>
+<p>Modern responsive websites for businesses, hospitals, gyms and startups.</p>
+</div>
+
+<div class="bento-card">
+<h3>Web Applications</h3>
+<p>Custom dashboards, authentication systems and scalable backend systems.</p>
+</div>
+
+<div class="bento-card">
+<h3>Website Maintenance</h3>
+<p>Speed optimization, bug fixing, hosting setup and performance improvements.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="trust reveal">
+
+<h2 style="font-size:2.5rem;margin-bottom:20px;">Trusted By Businesses</h2>
+
+<p style="color:var(--text-dim);max-width:600px;">
+Helping local businesses including healthcare clinics, gyms and startups
+build modern digital platforms.
+</p>
+
+</section>
+
+<section class="bento-container">
+
+<a class='bento-card span-2 reveal' href='about.html'>
+<h3>Expertise & Skills</h3>
+<p>Explore my technical stack including Java, Python, backend architecture and UI engineering.</p>
+</a>
+
+<a class='bento-card reveal' href='projects.html'>
+<h3>Selected Work</h3>
+<p>Real projects and case studies.</p>
+</a>
+
+<a class='bento-card reveal' href='experience.html'>
+<h3>The Journey</h3>
+<p>Leadership roles, hackathons and professional growth.</p>
+</a>
+
+<a class='bento-card span-2 reveal' href='experience.html'>
+<h3>Management & Strategy</h3>
+<p>Leadership experience managing real-world business operations.</p>
+</a>
+
+</section>
+
+<section class="cta reveal">
+
+<h2 style="font-size:3rem;margin-bottom:20px;">
+Let's Build Something Great
+</h2>
+
+<p style="color:var(--text-dim);margin-bottom:40px;">
+Available for freelance projects and collaborations.
+</p>
+
+<a class='cta-btn' href='contact.html'>
+Start a Project
+</a>
+
+</section>
+
+<footer>
+
+<div>© 2026 CHARAN.DEV</div>
+
+<div style="display:flex;gap:20px;">
+<a href="https://linkedin.com/in/charan11328" style="color:var(--text-dim);text-decoration:none;">LinkedIn</a>
+<a href="https://github.com/charan11328" style="color:var(--text-dim);text-decoration:none;">GitHub</a>
+</div>
+
+</footer>
+
+<script>
+
+const phrases = [
+    "Charan Sai", 
+    "a Developer", 
+    "a Freelancer", 
+    "a CSE Student",
+    "a UI Engineer",
+    "a Data Explorer"
+];
+
+const typewriter = document.getElementById('typewriter');
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 80;
+
+function type() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+        typewriter.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 40; 
+    } else {
+        typewriter.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 80; 
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typeSpeed = 2000; 
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 400;
+    }
+
+    setTimeout(type, typeSpeed);
+}
+
+document.addEventListener('mousemove',(e)=>{
+    const spotlight = document.getElementById('spotlight');
+    if(spotlight) {
+        spotlight.style.left=e.clientX+'px';
+        spotlight.style.top=e.clientY+'px';
+    }
+});
+
+const observerOptions={threshold:0.1};
+
+const observer=new IntersectionObserver((entries)=>{
+    entries.forEach((entry,index)=>{
+        if(entry.isIntersecting){
+            setTimeout(()=>{
+                entry.target.classList.add('active-reveal');
+            },index*100);
+        }
+    });
+},observerOptions);
+
+document.querySelectorAll('.reveal').forEach((el)=>observer.observe(el));
+
+window.onload=()=>{
+    document.getElementById("hero-img").classList.add("photo-appear");
+    setTimeout(type, 500);
+}
+
+</script>
+
+</body>
+</html>

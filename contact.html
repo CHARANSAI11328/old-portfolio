@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | CHARAN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#050505;
+--accent:#818cf8;
+--accent-glow:rgba(129,140,248,0.15);
+--text-main:#ffffff;
+--text-dim:#9ca3af;
+--surface:#111113;
+--border:rgba(255,255,255,0.06);
+--glass:rgba(255,255,255,0.02);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+body{background:var(--bg);color:var(--text-main);overflow-x:hidden}
+.noise{position:fixed;width:100%;height:100%;top:0;left:0;opacity:0.03;pointer-events:none;background:url('https://grainy-gradients.vercel.app/noise.svg');z-index:-1}
+.spotlight{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);filter:blur(80px);z-index:-1;transition:0.1s}
+
+nav{position:fixed;top:0;width:100%;padding:24px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);backdrop-filter:blur(10px)}
+.logo{font-weight:800;letter-spacing:-1px;font-size:1.2rem}
+.nav-links{display:flex;gap:30px;background:var(--glass);padding:12px 24px;border-radius:100px;border:1px solid var(--border)}
+nav a{text-decoration:none;color:var(--text-dim);font-size:0.85rem;font-weight:500;transition:all .4s}
+nav a:hover,nav a.active{color:var(--text-main)}
+
+.header-section{padding:150px 8% 60px}
+.header-section h1{font-size:clamp(2.5rem,8vw,4rem);letter-spacing:-3px;margin-bottom:20px;line-height:1}
+.header-section p{color:var(--text-dim);max-width:520px;font-size:1.1rem;margin-bottom:40px}
+
+.contact-container{padding:0 8% 100px;display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1200px;margin:0 auto}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:40px;transition:all .4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.contact-card:hover{transform:translateY(-8px);border-color:rgba(129,140,248,0.3);box-shadow:0 20px 40px rgba(129,140,248,0.1)}
+
+.status-indicator{display:flex;align-items:center;gap:10px;font-size:0.75rem;font-weight:700;color:var(--accent);margin-bottom:20px;letter-spacing:1px;text-transform:uppercase}
+.dot{width:8px;height:8px;background:var(--accent);border-radius:50%;position:relative}
+.dot::after{content:'';position:absolute;width:100%;height:100%;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:0.8}100%{transform:scale(3);opacity:0}}
+
+.contact-form input,.contact-form textarea{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:16px 20px;color:var(--text-main);font-size:1rem;margin-bottom:20px;font-family:inherit;transition:all .3s}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.contact-form textarea{height:140px;resize:vertical}
+.contact-form button{width:100%;background:linear-gradient(135deg,var(--accent),#6366f1);border:none;border-radius:16px;padding:18px;color:var(--bg);font-size:1.1rem;font-weight:700;cursor:pointer;transition:all .3s}
+.contact-form button:hover{transform:translateY(-2px);box-shadow:0 15px 30px var(--accent-glow)}
+.contact-form button:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+#success-msg{display:none;color:var(--accent);margin-top:15px;padding:12px;background:var(--glass);border-radius:12px;border:1px solid var(--accent);font-weight:600;text-align:center}
+
+.social-links a{color:var(--text-dim);text-decoration:none;font-size:0.95rem;font-weight:500;transition:all .3s;display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.social-links a:last-child{border-bottom:none}
+.social-links a:hover{color:var(--accent);transform:translateX(8px)}
+
+.reveal{opacity:0;transform:translateY(40px)}
+.active-reveal{opacity:1;transform:translateY(0);transition:all 1s cubic-bezier(.2,.8,.2,1)}
+
+@media(max-width:768px){
+.contact-container{grid-template-columns:1fr;padding:0 6%}
+.nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="spotlight" id="spotlight"></div>
+
+<nav>
+<div class="logo">CHARAN.DEV</div>
+<div class="nav-links">
+<a href='index.html'>Home</a>
+<a href='about.html'>Expertise</a>
+<a href='projects.html'>Archive</a>
+<a href='experience.html'>Journey</a>
+<a class='active' href='contact.html'>Contact</a>
+</div>
+</nav>
+
+<section class="header-section">
+<div class="status-indicator reveal"><span class="dot"></span> Open for collaboration</div>
+<h1 class="reveal">Get In<br>Touch.</h1>
+<p class="reveal" style="transition-delay:0.2s">Have a serious project in mind? Let's discuss how I can help bring your architecture to life.</p>
+</section>
+
+<section class="contact-container">
+<div class="contact-card reveal" style="transition-delay:0.4s">
+<h3 style="font-size:1.6rem;color:var(--accent);margin-bottom:25px;font-weight:600">Send me a message</h3>
+
+<form id="portfolio-form" action="https://formspree.io/f/xpqylowj" method="POST" class="contact-form">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Tell me about your project..." required></textarea>
+<button type="submit" id="submit-btn">Send Message</button>
+<div id="success-msg">✅ Message sent! I'll get back to you within 24 hours.</div>
+</form>
+
+</div>
+
+<div class="contact-card reveal" style="transition-delay:0.6s">
+<h3 style="font-size:1.6rem;color:var(--accent);margin-bottom:25px;font-weight:600">Global Reach</h3>
+<div class="social-links">
+<a href="mailto:saikamarajugadda21@gmail.com">📧 Email</a>
+<a href="https://github.com/charan11328" target="_blank">💻 GitHub</a>
+<a href="https://linkedin.com/in/charan11328" target="_blank">💼 LinkedIn</a>
+<a href="https://wa.me/9059262808" target="_blank">📱 WhatsApp</a>
+</div>
+<p style="color:var(--text-dim);margin-top:30px;font-size:0.95rem;line-height:1.6">I'm currently based in India but work with clients globally. I'm available for calls to discuss technical architecture and long-term project requirements.</p>
+</div>
+</section>
+
+<script>
+document.addEventListener('mousemove',e=>{
+    const spotlight = document.getElementById('spotlight');
+    spotlight.style.left=e.clientX+'px';
+    spotlight.style.top=e.clientY+'px';
+},{passive:true});
+
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach((entry)=>{
+        if(entry.isIntersecting) entry.target.classList.add('active-reveal');
+    });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const form = document.getElementById('portfolio-form');
+const successMsg = document.getElementById('success-msg');
+const submitBtn = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    submitBtn.innerText = "Sending...";
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+    
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            successMsg.style.display = 'block';
+            form.reset();
+            submitBtn.innerText = "Send Message";
+            submitBtn.disabled = false;
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        } else {
+            const data = await response.json();
+            if (Object.hasOwn(data, 'errors')) {
+                alert(data["errors"].map(error => error["message"]).join(", "));
+            } else {
+                alert("Oops! There was a problem submitting your form.");
+            }
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Send Message";
+        }
+    } catch (error) {
+        alert("Network error. Please try again later.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Send Message";
+    }
+});
+</script>
+</body>
+</html>```

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthBridge Case Study | CHARAN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#050505;
+--accent:#818cf8;
+--accent-glow:rgba(129,140,248,0.15);
+--text-main:#ffffff;
+--text-dim:#9ca3af;
+--surface:#111113;
+--border:rgba(255,255,255,0.06);
+--glass:rgba(255,255,255,0.02);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+body{background:var(--bg);color:var(--text-main);overflow-x:hidden;line-height:1.6}
+.noise{position:fixed;width:100%;height:100%;top:0;left:0;opacity:0.03;pointer-events:none;background:url('https://grainy-gradients.vercel.app/noise.svg');z-index:-1}
+.spotlight{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);filter:blur(80px);z-index:-1}
+nav{position:fixed;top:0;width:100%;padding:24px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);backdrop-filter:blur(10px)}
+.logo{font-weight:800;letter-spacing:-1px;font-size:1.2rem;text-decoration:none;color:white}
+.back-link{text-decoration:none;color:var(--text-dim);font-size:0.85rem;font-weight:500;transition:.4s;display:flex;align-items:center;gap:8px}
+.back-link:hover{color:var(--accent)}
+.container{max-width:900px;margin:0 auto;padding:150px 8% 100px}
+.tag{display:inline-block;background:var(--accent-glow);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:0.8rem;font-weight:600;border:1px solid rgba(129,140,248,0.3);margin-bottom:20px}
+h1{font-size:clamp(2.5rem,8vw,4rem);letter-spacing:-3px;margin-bottom:24px;line-height:1.1}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin:40px 0;padding:30px;background:var(--surface);border-radius:24px;border:1px solid var(--border)}
+.stat-item h4{color:var(--text-dim);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.stat-item p{color:var(--text-main);font-weight:600}
+.content-section{margin-bottom:60px}
+.content-section h2{font-size:1.8rem;margin-bottom:20px;color:var(--accent);letter-spacing:-1px}
+.content-section p{color:var(--text-dim);margin-bottom:20px;font-size:1.05rem}
+.tech-stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.tech-chip{background:var(--glass);border:1px solid var(--border);padding:8px 18px;border-radius:12px;font-size:0.85rem;color:var(--text-main)}
+.image-box{width:100%;height:400px;background:var(--surface);border-radius:24px;border:1px solid var(--border);margin-bottom:60px;overflow:hidden}
+.image-box img{width:100%;height:100%;object-fit:cover;opacity:0.8}
+hr{border:none;border-top:1px solid var(--border);margin:60px 0}
+@media(max-width:768px){
+.container{padding:120px 6% 60px}
+.image-box{height:250px}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="spotlight" id="spotlight"></div>
+<nav>
+<a class='logo' href='index.html'>CHARAN.DEV</a>
+<a class='back-link' href='projects.html'>← Back to Archive</a>
+</nav>
+<div class="container">
+<span class="tag">Healthcare AI</span>
+<h1>HealthBridge AI:<br>Rural Health Equity.</h1>
+<div class="overview-grid">
+<div class="stat-item">
+<h4>Role</h4>
+<p>Lead Developer</p>
+</div>
+<div class="stat-item">
+<h4>Context</h4>
+<p>B.Tech Project / Hackathon</p>
+</div>
+<div class="stat-item">
+<h4>Timeline</h4>
+<p>Jan 2026 - Present</p>
+</div>
+<div class="stat-item">
+<h4>Stack</h4>
+<p>Java / Gemini API / JS</p>
+</div>
+</div>
+<div class="image-box">
+<img src="demo.png" alt="Project Visualization">
+</div>
+<div class="content-section">
+<h2>The Challenge</h2>
+<p>In rural India, the ratio of doctors to patients remains critical. Many preventable diseases escalate because citizens lack immediate access to basic medical guidance. The challenge was to create a lightweight, multilingual system that could explain symptoms without requiring high-speed internet or expensive hardware.</p>
+</div>
+<div class="content-section">
+<h2>The Solution</h2>
+<p>HealthBridge AI acts as a digital bridge. Built using the Gemini 2.5 Flash model, it processes symptoms in regional languages like Telugu, Hindi, and Tamil. The interface uses high-contrast glassmorphism to remain readable in varied outdoor lighting conditions typical of rural environments.</p>
+<div class="tech-stack">
+<div class="tech-chip">Google Gemini API</div>
+<div class="tech-chip">Bootstrap 5</div>
+<div class="tech-chip">Responsive Web Design</div>
+<div class="tech-chip">Prompt Engineering</div>
+</div>
+</div>
+<hr>
+<div class="content-section">
+<h2>Impact & Results</h2>
+<p>The platform achieved an 80% accuracy rate in identifying common seasonal diseases during testing. By providing preventive measures and vaccine schedules, the application reduces the burden on local clinics for non-emergency consultations.</p>
+</div>
+</div>
+<script>
+document.addEventListener('mousemove',e=>{
+document.getElementById('spotlight').style.left=e.clientX+'px';
+document.getElementById('spotlight').style.top=e.clientY+'px';
+},{passive:true});
+</script>
+</body>
+</html>

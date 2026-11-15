@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive | CHARAN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#050505;
+--accent:#818cf8;
+--accent-glow:rgba(129,140,248,0.15);
+--text-main:#ffffff;
+--text-dim:#9ca3af;
+--surface:#111113;
+--border:rgba(255,255,255,0.06);
+--glass:rgba(255,255,255,0.02);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+body{background:var(--bg);color:var(--text-main);overflow-x:hidden}
+.noise{position:fixed;width:100%;height:100%;top:0;left:0;opacity:0.03;pointer-events:none;background:url('https://grainy-gradients.vercel.app/noise.svg');z-index:-1}
+.spotlight{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);filter:blur(80px);z-index:-1;transition:.1s}
+nav{position:fixed;top:0;width:100%;padding:24px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);backdrop-filter:blur(10px)}
+.logo{font-weight:800;letter-spacing:-1px;font-size:1.2rem}
+.nav-links{display:flex;gap:30px;background:var(--glass);padding:12px 24px;border-radius:100px;border:1px solid var(--border)}
+nav a{text-decoration:none;color:var(--text-dim);font-size:0.85rem;font-weight:500;transition:all .4s}
+nav a:hover,nav a.active{color:var(--text-main)}
+.header-section{padding:150px 8% 60px}
+.header-section h1{font-size:clamp(2.5rem,8vw,4rem);letter-spacing:-3px;margin-bottom:20px;line-height:1}
+.header-section p{color:var(--text-dim);max-width:500px;font-size:1.1rem;margin-bottom:40px}
+.project-grid{padding:0 8% 100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:35px;transition:all .4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.project-card:hover{transform:translateY(-10px);border-color:var(--accent);box-shadow:0 20px 60px var(--accent-glow)}
+.project-img{width:100%;height:200px;object-fit:cover;border-radius:20px;margin-bottom:20px;border:1px solid var(--border)}
+.tag{display:inline-block;background:var(--glass);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:0.8rem;font-weight:600;border:1px solid var(--border);margin-bottom:12px}
+.project-card h3{font-size:1.5rem;margin-bottom:12px;color:var(--text-main);font-weight:600;line-height:1.3}
+.project-card p{color:var(--text-dim);margin-bottom:25px;line-height:1.6}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap}
+.btn-view,.btn-demo{background:var(--glass);color:var(--text-main);text-decoration:none;padding:10px 20px;border-radius:12px;border:1px solid var(--border);font-size:0.9rem;font-weight:500;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-view:hover,.btn-demo:hover{background:var(--accent);border-color:var(--accent);color:var(--bg);transform:translateY(-2px)}
+.btn-demo{background:var(--accent-glow);border-color:rgba(129,140,248,0.3)}
+.reveal{opacity:0;transform:translateY(40px)}
+.active-reveal{opacity:1;transform:translateY(0);transition:all 1s cubic-bezier(.2,.8,.2,1)}
+@media(max-width:768px){
+.project-grid{padding:0 6% 80px;grid-template-columns:1fr;gap:24px}
+.header-section{padding:120px 6% 50px}
+nav{padding:20px 6%}
+.nav-links{display:none}
+.project-card{padding:25px}
+}
+@media(max-width:480px){
+.header-section{padding:100px 5% 40px}
+.project-grid{padding:0 5% 60px}
+.project-img{height:160px}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="spotlight" id="spotlight"></div>
+<nav>
+<div class="logo">CHARAN.DEV</div>
+<div class="nav-links">
+<a href='index.html'>Home</a>
+<a href='about.html'>Expertise</a>
+<a class='active' href='projects.html'>Archive</a>
+<a href='experience.html'>Journey</a>
+<a href='contact.html'>Contact</a>
+</div>
+</nav>
+<section class="header-section">
+<h1 class="reveal">Project<br>Archive.</h1>
+<p class="reveal" style="animation-delay:0.2s">Selected projects including research systems, freelance platforms, and experimental builds.</p>
+</section>
+<section class="project-grid">
+<div class="project-card reveal" style="animation-delay:0.4s">
+<img src="icon.png" alt="LetterGen Pro desktop app" class="project-img">
+<span class="tag">Utility / Automation</span>
+<h3>LetterGen Pro</h3>
+<p>A sophisticated Java desktop application designed for automated professional document generation. Features a custom UI and efficient file-handling for streamlined workflows.</p>
+<div class="btn-group">
+<a href="https://github.com/charan11328/Letter-Generator/releases/download/v.11/LetterGen.Installer.exe" class="btn-view">📥 Download Build</a>
+<a href="https://github.com/charan11328/Letter-Generator/releases/tag/v.11" class="btn-demo">💻 GitHub</a>
+</div>
+</div>
+<div class="project-card reveal" style="animation-delay:0.6s">
+<img src="https://daxg39y63pxwu.cloudfront.net/images/blog/predictive-analytics-in-healthcare-projects/Predictive_Analytics_in_Healthcare_Projects.webp" alt="HealthRisk Analytics platform" class="project-img">
+<span class="tag">Healthcare / Analytics</span>
+<h3>HealthRisk Analytics</h3>
+<p>Hackathon winning analytics platform that processes real-time patient data to predict health risks.</p>
+<div class="btn-group">
+<a class='btn-view' href='case-study.html'>📄 View Case Study</a>
+<a class='btn-demo' href='disease-ai.html'>🚀 Live Demo</a>
+</div>
+</div>
+<div class="project-card reveal" style="animation-delay:0.8s">
+<img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&fit=crop" alt="Patient management system" class="project-img">
+<span class="tag">Healthcare / Management</span>
+<h3>PatientFlow Pro</h3>
+<p>Custom-built patient management system focusing on responsive accessibility and secure records management.</p>
+<div class="btn-group">
+<a class='btn-demo' href='patientflow.html'>🚀 Live Demo</a>
+<a href="https://github.com/charan11328/patient-flow" class="btn-view">💻 GitHub</a>
+</div>
+</div>
+<div class="project-card reveal" style="animation-delay:1s">
+<img src="https://media.licdn.com/dms/image/v2/D4D12AQHwzkAE6lEY1g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1718879796911?e=2147483647&v=beta&t=hHbSrKH-_TVuGR03UVJlETMUzI9XSGobGYya35n1RXM" alt="Consumer behavior analysis" class="project-img">
+<span class="tag">Research / Data Science</span>
+<h3>ConsumerTrend Analyzer</h3>
+<p>B.Tech research project using Python and NumPy to analyze large datasets for trend identification in consumer behavior.</p>
+<div class="btn-group">
+<a class='btn-view' href='cta.html'>🚀 Live Demo</a>
+</div>
+</div>
+</section>
+<script>
+document.addEventListener('mousemove',e=>{
+document.getElementById('spotlight').style.left=e.clientX+'px';
+document.getElementById('spotlight').style.top=e.clientY+'px';
+},{passive:true});
+const observer=new IntersectionObserver(entries=>{
+entries.forEach((entry,index)=>{
+if(entry.isIntersecting) setTimeout(()=>entry.target.classList.add('active-reveal'),index*120);
+});
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

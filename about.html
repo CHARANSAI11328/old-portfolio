@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expertise | CHARAN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#050505;
+--accent:#818cf8;
+--accent-glow:rgba(129,140,248,0.15);
+--text-main:#ffffff;
+--text-dim:#9ca3af;
+--surface:#111113;
+--border:rgba(255,255,255,0.06);
+--glass:rgba(255,255,255,0.02);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+body{background:var(--bg);color:var(--text-main);overflow-x:hidden;line-height:1.6}
+.noise{position:fixed;width:100%;height:100%;top:0;left:0;opacity:0.03;pointer-events:none;background:url('https://grainy-gradients.vercel.app/noise.svg');z-index:-1}
+.spotlight{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:60vw;height:60vw;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);filter:blur(80px);z-index:-1;transition:.1s}
+nav{position:fixed;top:0;width:100%;padding:24px 8%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);backdrop-filter:blur(10px)}
+.logo{font-weight:800;letter-spacing:-1px;font-size:1.2rem}
+.nav-links{display:flex;gap:30px;background:var(--glass);padding:12px 24px;border-radius:100px;border:1px solid var(--border)}
+nav a{text-decoration:none;color:var(--text-dim);font-size:0.85rem;font-weight:500;transition:all .4s}
+nav a:hover,nav a.active{color:var(--text-main)}
+.header-section{padding:150px 8% 60px 8%}
+.header-section h1{font-size:clamp(2.5rem,8vw,4rem);letter-spacing:-3px;margin-bottom:20px;line-height:1}
+.header-section p{color:var(--text-dim);max-width:520px;font-size:1.1rem}
+.bento-container{padding:0 8% 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bento-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:35px;transition:all .4s cubic-bezier(.2,.8,.2,1)}
+.bento-card:hover{transform:translateY(-6px);border-color:rgba(129,140,248,0.3);box-shadow:0 20px 40px rgba(129,140,248,0.1)}
+.span-2{grid-column:span 2}
+.span-3{grid-column:span 3}
+.bento-card h3{font-size:1.4rem;margin-bottom:15px;color:var(--accent);font-weight:600}
+.skill-list{list-style:none;color:var(--text-dim)}
+.skill-list li{margin-bottom:10px;display:flex;gap:10px;align-items:center;font-weight:500}
+.skill-list li::before{content:"→";color:var(--accent);font-size:1.1rem;font-weight:700}
+.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:20px}
+.tech{background:var(--glass);border:1px solid var(--border);padding:16px 12px;border-radius:12px;text-align:center;font-size:0.85rem;font-weight:500;transition:.3s;cursor:pointer}
+.tech:hover{background:var(--accent);color:var(--bg);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(40px)}
+.active-reveal{opacity:1;transform:translateY(0);transition:all 1s cubic-bezier(.2,.8,.2,1)}
+@media(max-width:1024px){.bento-container{grid-template-columns:repeat(2,1fr)}.span-2{grid-column:span 1}.span-3{grid-column:span 2}}
+@media(max-width:768px){
+.bento-container{grid-template-columns:1fr;gap:16px;padding:0 6% 80px}
+.header-section{padding:120px 6% 50px 6%}
+nav{padding:20px 6%}
+.nav-links{display:none}
+.logo{font-size:1rem}
+.tech-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+@media(max-width:480px){
+.header-section h1{font-size:2.5rem}
+.header-section{padding:100px 5% 40px 5%}
+.bento-container{padding:0 5% 60px}
+.bento-card{padding:25px}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="spotlight" id="spotlight"></div>
+<nav>
+<div class="logo">CHARAN.DEV</div>
+<div class="nav-links">
+<a href='index.html'>Home</a>
+<a class='active' href='about.html'>Expertise</a>
+<a href='projects.html'>Archive</a>
+<a href='experience.html'>Journey</a>
+<a href='contact.html'>Contact</a>
+</div>
+</nav>
+<section class="header-section reveal">
+<h1>Technical<br>Core.</h1>
+<p>My development stack focuses on building fast, scalable web platforms and modern user interfaces. I specialize in creating reliable backend systems and smooth frontend experiences for businesses and startups.</p>
+</section>
+<section class="bento-container">
+<div class="bento-card reveal">
+<h3>Backend Development</h3>
+<ul class="skill-list">
+<li>Java Spring Boot</li>
+<li>REST API Architecture</li>
+<li>Python Automation</li>
+<li>MySQL & PostgreSQL</li>
+<li>Server Logic</li>
+</ul>
+</div>
+<div class="bento-card span-2 reveal">
+<h3>Data Analysis</h3>
+<p style="color:var(--text-dim);margin-bottom:20px">Working with structured datasets using Python to extract patterns and insights.</p>
+<ul class="skill-list" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<li>NumPy</li>
+<li>Pandas</li>
+<li>Statistical Analysis</li>
+<li>Data Cleaning</li>
+<li>Exploratory Data Analysis</li>
+<li>Pattern Recognition</li>
+</ul>
+</div>
+<div class="bento-card span-2 reveal">
+<h3>Frontend Engineering</h3>
+<p style="color:var(--text-dim);margin-bottom:20px">Designing responsive and interactive web interfaces using modern web technologies.</p>
+<ul class="skill-list" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<li>HTML5</li>
+<li>CSS3</li>
+<li>JavaScript</li>
+<li>Responsive Design</li>
+<li>UI Animation</li>
+<li>Modern Layout Systems</li>
+</ul>
+</div>
+<div class="bento-card reveal">
+<h3>Developer Tools</h3>
+<ul class="skill-list">
+<li>Git & GitHub</li>
+<li>Linux Environment</li>
+<li>Deployment Workflow</li>
+<li>System Design</li>
+<li>Debugging</li>
+</ul>
+</div>
+<div class="bento-card span-3 reveal">
+<h3>Core Technology Stack</h3>
+<div class="tech-grid">
+<div class="tech">Java</div>
+<div class="tech">Python</div>
+<div class="tech">JavaScript</div>
+<div class="tech">Spring Boot</div>
+<div class="tech">HTML5</div>
+<div class="tech">CSS3</div>
+<div class="tech">MySQL</div>
+<div class="tech">PostgreSQL</div>
+<div class="tech">NumPy</div>
+<div class="tech">Pandas</div>
+<div class="tech">Git</div>
+<div class="tech">Linux</div>
+</div>
+</div>
+<div class="bento-card span-3 reveal">
+<h3>Freelance Capabilities</h3>
+<p style="color:var(--text-dim);max-width:700px;line-height:1.7">I build modern websites and digital platforms for businesses including hospitals, gyms, and local companies. My work focuses on performance, reliability, and clean UI design.</p>
+</div>
+</section>
+<script>
+document.addEventListener('mousemove',e=>{
+const spotlight=document.getElementById('spotlight');
+spotlight.style.left=e.clientX+'px';
+spotlight.style.top=e.clientY+'px';
+},{passive:true});
+const observer=new IntersectionObserver(entries=>{
+entries.forEach((entry,index)=>{
+if(entry.isIntersecting){
+setTimeout(()=>entry.target.classList.add('active-reveal'),index*120);
+}
+});
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

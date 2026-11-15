@@ -1,0 +1,350 @@
+/* ============================================================
+   CHARAN SAI — BOLD & EXPRESSIVE PORTFOLIO BASE STYLES
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+
+/* ─── RESET ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ─── CSS VARIABLES (Dark default) ─── */
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --surface: #1a1a1a;
+  --surface2: #222222;
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.18);
+
+  --text: #f5f5f0;
+  --text-mid: #999990;
+  --text-dim: #555550;
+
+  --accent: #e8ff47;       /* electric yellow-green */
+  --accent-rgb: 232,255,71;
+  --accent2: #ff4747;      /* hot red for contrast */
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --nav-h: 72px;
+  --radius: 6px;
+  --radius-lg: 16px;
+}
+
+/* ─── LIGHT THEME ─── */
+[data-theme="light"] {
+  --bg: #f0ede8;
+  --bg2: #e8e4de;
+  --surface: #ffffff;
+  --surface2: #f5f2ed;
+  --border: rgba(0,0,0,0.08);
+  --border-bright: rgba(0,0,0,0.18);
+  --text: #111110;
+  --text-mid: #666660;
+  --text-dim: #aaa;
+  --accent: #1a1a1a;
+  --accent2: #e8ff47;
+}
+
+/* ─── BASE ─── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+
+::selection { background: var(--accent); color: #000; }
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.display {
+  font-family: var(--font-display);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.3s;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo .logo-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--text-mid);
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-link:hover { color: var(--text); background: var(--surface); }
+.nav-link.active { color: var(--bg); background: var(--text); }
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+.nav-hire {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 9px 20px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 100px;
+  transition: transform 0.2s, filter 0.2s;
+  white-space: nowrap;
+}
+
+.nav-hire:hover { transform: scale(1.04); filter: brightness(1.1); }
+
+/* ─── MOBILE MENU ─── */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.menu-toggle span {
+  width: 22px; height: 2px;
+  background: var(--text);
+  display: block;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 99;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 40px;
+  gap: 8px;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 12vw, 5rem);
+  color: var(--text-dim);
+  transition: color 0.2s;
+  line-height: 1.1;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active { color: var(--accent); }
+
+/* ─── THEME TOGGLE ─── */
+.theme-toggle {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border-bright);
+  border-radius: 50%;
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  font-size: 1rem;
+}
+
+.theme-toggle:hover { transform: rotate(20deg); }
+
+/* ─── FOOTER ─── */
+.footer {
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* ─── STATUS DOT ─── */
+.status-dot {
+  width: 7px; height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─── PILL ─── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-mid);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+/* ─── TAG ─── */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-mid);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.tag:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-fill {
+  padding: 14px 32px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 100px;
+}
+
+.btn-fill:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.3); }
+
+.btn-outline {
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-bright);
+  border-radius: 100px;
+}
+
+.btn-outline:hover { background: var(--surface); border-color: var(--text-mid); }
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── HORIZONTAL RULE ─── */
+.hr { width: 100%; height: 1px; background: var(--border); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .nav-links, .nav-hire { display: none; }
+  .menu-toggle { display: flex; }
+  .nav { padding: 0 24px; }
+  .footer { padding: 32px 24px; }
+}

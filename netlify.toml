@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/api/gemini/*"
+  to = "https://generativelanguage.googleapis.com/v1beta/models/:splat?key=:env_API_KEY"
+  status = 200
+  force = true
+
+[projects.pretty_urls]
+  enabled = true

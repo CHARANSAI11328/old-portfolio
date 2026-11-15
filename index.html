@@ -79,22 +79,34 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-padding:24px 8%;
+padding:20px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
 z-index:1000;
 background:linear-gradient(to bottom,var(--bg) 0%,transparent 100%);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+transition:all .3s;
+}
+
+.logo{
+font-weight:800;
+letter-spacing:-1px;
+font-size:1.2rem;
+text-decoration:none;
+color:var(--text-main);
+z-index:1001;
 }
 
 .nav-links{
 display:flex;
-gap:30px;
+gap:24px;
 background:var(--glass);
-padding:10px 25px;
+padding:10px 24px;
 border-radius:100px;
 border:1px solid var(--border);
+backdrop-filter:blur(10px);
 }
 
 nav a{
@@ -102,12 +114,47 @@ text-decoration:none;
 color:var(--text-dim);
 font-size:0.85rem;
 font-weight:500;
-transition:0.4s;
+transition:0.3s;
 }
 
 nav a:hover,
 nav a.active{
 color:var(--text-main);
+}
+
+.mobile-toggle{
+display:none;
+flex-direction:column;
+justify-content:center;
+gap:5px;
+width:42px;
+height:42px;
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:10px;
+cursor:pointer;
+padding:10px;
+z-index:1001;
+transition:0.3s;
+}
+
+.mobile-toggle span{
+display:block;
+width:100%;
+height:2px;
+background:var(--text-main);
+border-radius:2px;
+transition:transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-toggle.active span:nth-child(1){
+transform:translateY(7px) rotate(45deg);
+}
+.mobile-toggle.active span:nth-child(2){
+opacity:0;
+}
+.mobile-toggle.active span:nth-child(3){
+transform:translateY(-7px) rotate(-45deg);
 }
 
 .hero{
@@ -241,22 +288,41 @@ font-weight:700;
 
 footer{
 margin:0 8% 40px;
-padding:60px 0;
+padding:50px 0 20px;
 border-top:1px solid var(--border);
 display:flex;
 justify-content:space-between;
+align-items:center;
+color:var(--text-dim);
+font-size:0.9rem;
+}
+
+.footer-links{
+display:flex;
+gap:20px;
+}
+
+.footer-links a{
+color:var(--text-dim);
+text-decoration:none;
+transition:0.3s;
+}
+
+.footer-links a:hover{
+color:var(--text-main);
 }
 
 @media(max-width:992px){
-
 .hero-container{
 flex-direction:column;
 text-align:center;
+gap:30px;
 }
 
 .hero-image{
-width:60%;
-margin-bottom:30px;
+width:100%;
+max-width:320px;
+margin-bottom:20px;
 }
 
 .services-grid{
@@ -264,9 +330,105 @@ grid-template-columns:1fr;
 }
 
 .bento-container{
-grid-template-columns:1fr;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+}
 }
 
+@media(max-width:768px){
+nav{
+padding:16px 5%;
+background:rgba(5,5,5,0.85);
+}
+
+.mobile-toggle{
+display:flex;
+}
+
+.nav-links{
+position:fixed;
+top:0;
+right:-100%;
+width:75%;
+max-width:300px;
+height:100vh;
+height:100dvh;
+background:#0d0d10;
+border-left:1px solid var(--border);
+border-radius:0;
+padding:90px 24px 40px;
+flex-direction:column;
+gap:16px;
+transition:right 0.35s cubic-bezier(0.4,0,0.2,1);
+box-shadow:-10px 0 30px rgba(0,0,0,0.8);
+z-index:1000;
+}
+
+.nav-links.open{
+right:0;
+}
+
+.nav-links a{
+font-size:1.1rem;
+font-weight:600;
+padding:12px 18px;
+border-radius:12px;
+background:var(--glass);
+border:1px solid var(--border);
+display:block;
+}
+
+.nav-links a.active{
+background:var(--accent-glow);
+border-color:rgba(129,140,248,0.3);
+color:var(--accent);
+}
+
+.hero{
+padding:110px 5% 40px;
+min-height:auto;
+}
+
+.hero-text h1{
+letter-spacing:-1.5px;
+}
+
+.services, .trust, .cta{
+padding:60px 5%;
+}
+
+.bento-container{
+grid-template-columns:1fr;
+padding:0 5% 60px;
+}
+
+.span-2{
+grid-column:span 1;
+}
+
+footer{
+margin:0 5% 30px;
+padding:35px 0 15px;
+flex-direction:column;
+gap:18px;
+text-align:center;
+}
+}
+
+@media(max-width:480px){
+.hero-image{
+max-width:240px;
+}
+
+.bento-card{
+padding:25px;
+}
+
+.cta-btn{
+display:inline-block;
+width:100%;
+max-width:280px;
+}
 }
 
 </style>
@@ -278,9 +440,15 @@ grid-template-columns:1fr;
 <div class="spotlight" id="spotlight"></div>
 
 <nav>
-<div style="font-weight:800;letter-spacing:-1px;">CHARAN.DEV</div>
+<a class="logo" href="index.html">CHARAN.DEV</a>
 
-<div class="nav-links">
+<button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<div class="nav-links" id="navLinks">
 <a class='active' href='index.html'>Home</a>
 <a href='about.html'>Expertise</a>
 <a href='projects.html'>Archive</a>
@@ -392,16 +560,43 @@ Start a Project
 
 <footer>
 
-<div>© 2026 CHARAN.DEV</div>
+<div>© 2026 CHARAN.DEV · Built for Performance</div>
 
-<div style="display:flex;gap:20px;">
-<a href="https://linkedin.com/in/charan11328" style="color:var(--text-dim);text-decoration:none;">LinkedIn</a>
-<a href="https://github.com/charan11328" style="color:var(--text-dim);text-decoration:none;">GitHub</a>
+<div class="footer-links">
+<a href="https://linkedin.com/in/charan11328" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://github.com/charan11328" target="_blank" rel="noopener">GitHub</a>
+<a href="contact.html">Contact</a>
 </div>
 
 </footer>
 
 <script>
+
+// Mobile Navigation Toggle
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+if(mobileToggle && navLinks){
+    mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navLinks.classList.toggle('open');
+        mobileToggle.classList.toggle('active');
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', (e) => {
+        if(navLinks.classList.contains('open') && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)){
+            navLinks.classList.remove('open');
+            mobileToggle.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            mobileToggle.classList.remove('active');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+}
 
 const phrases = [
     "Charan Sai", 

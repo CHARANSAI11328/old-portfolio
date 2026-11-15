@@ -28,6 +28,7 @@ body {
     color: white;
     padding: 24px;
     position: fixed;
+    z-index: 100;
 }
 
 .main-content {
@@ -38,7 +39,7 @@ body {
 
 .stat-card {
     background: var(--white);
-    padding: 24px;
+    padding: 20px;
     border-radius: 16px;
     border: 1px solid #e2e8f0;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
@@ -56,7 +57,7 @@ body {
 
 .chart-container {
     background: var(--white);
-    padding: 24px;
+    padding: 20px;
     border-radius: 16px;
     margin-top: 24px;
     border: 1px solid #e2e8f0;
@@ -64,7 +65,8 @@ body {
 
 table {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
+    min-width: 500px;
 }
 
 th {
@@ -75,8 +77,42 @@ th {
 }
 
 td {
-    padding: 16px 12px;
+    padding: 14px 12px;
     border-top: 1px solid #f1f5f9;
+}
+
+@media(max-width: 991px) {
+    body {
+        display: block;
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 16px 20px;
+    }
+    .sidebar .d-grid {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 8px !important;
+    }
+    .sidebar .d-grid .btn {
+        flex: 1 1 auto;
+        margin: 0 !important;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+    .sidebar h4 {
+        margin-bottom: 12px !important;
+    }
+    .sidebar p {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 24px 16px;
+    }
 }
 </style>
 </head>
@@ -95,46 +131,46 @@ td {
 </div>
 
 <div class="main-content">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
             <h2 class="fw-bold">Clinic Overview</h2>
-            <p class="text-secondary">Monitoring patient flow in real-time.</p>
+            <p class="text-secondary mb-0">Monitoring patient flow in real-time.</p>
         </div>
         <button class="btn btn-primary" style="background: var(--accent); border:none;">+ New Admission</button>
     </div>
 
-    <div class="row g-4">
-        <div class="col-md-3">
+    <div class="row g-3 g-md-4">
+        <div class="col-6 col-md-3">
             <div class="stat-card">
                 <small class="text-secondary">Total Patients</small>
-                <h3 class="fw-bold">1,284</h3>
+                <h3 class="fw-bold my-1">1,284</h3>
                 <span class="text-success small">↑ 12% this month</span>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="stat-card">
                 <small class="text-secondary">Avg. Wait Time</small>
-                <h3 class="fw-bold">14 min</h3>
-                <span class="text-danger small">↓ 2 min from yesterday</span>
+                <h3 class="fw-bold my-1">14 min</h3>
+                <span class="text-danger small">↓ 2 min</span>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="stat-card">
-                <small class="text-secondary">Active Consultations</small>
-                <h3 class="fw-bold">8</h3>
+                <small class="text-secondary">Consultations</small>
+                <h3 class="fw-bold my-1">8</h3>
                 <span class="text-primary small">Capacity: 85%</span>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
             <div class="stat-card">
                 <small class="text-secondary">Satisfaction</small>
-                <h3 class="fw-bold">4.8/5</h3>
-                <span class="text-success small">Based on 200 reviews</span>
+                <h3 class="fw-bold my-1">4.8/5</h3>
+                <span class="text-success small">200 reviews</span>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row g-3 g-md-4">
         <div class="col-md-8">
             <div class="chart-container">
                 <h6 class="fw-bold mb-4">Patient Volume Trends</h6>
@@ -151,6 +187,7 @@ td {
 
     <div class="chart-container">
         <h6 class="fw-bold mb-3">Live Queue</h6>
+        <div class="table-responsive">
         <table>
             <thead>
                 <tr>
@@ -185,6 +222,7 @@ td {
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 
